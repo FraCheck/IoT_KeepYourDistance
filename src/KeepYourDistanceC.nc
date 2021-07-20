@@ -3,7 +3,7 @@
 #include "KeepYourDistance.h"
 #include "printf.h"
 
-module KeepYourDistance @safe() {
+module KeepYourDistanceC @safe() {
   uses {
     interface Boot;
     interface Receive;
@@ -16,9 +16,13 @@ module KeepYourDistance @safe() {
 implementation {
 	message_t packet;
 	bool locked;
+	
 	/* Initialization of variables */
-  
-  
+	
+	// 7 total motes, 6 neighbours + 1 current mote, not to be incremented
+	int neighbouring_motes[6] = {0,0,0,0,0,0};
+	int neighbouring_motes_prev[6] = {0,0,0,0,0,0};
+	
 	event void Boot.booted() {
 		call AMControl.start();
 	}
@@ -28,8 +32,8 @@ implementation {
 			/* Assign frequency to the broadcaster timer */
 			uint32_t frequency = 500; // [ms]
 			
-			//printf("Example of how to do a printf",frequency);
-			//printfflush();
+			printf("Example of how to do a printf",frequency);
+			printfflush();
 			
 			call Timer1.startPeriodic(frequency);
 		}
@@ -43,11 +47,10 @@ implementation {
 	}
   
 	event void Timer1.fired() {
-		dbg("KeepYourDistanceC", "KeepYourDistanceC: Timer1[Broadcaster] fired");
-		if (locked) {
-			return;
-		}
-		else {
+		printf("KeepYourDistanceC: Timer1[Broadcaster] fired");
+		printfflush();
+		if (!locked)
+		{
 			keep_your_distance_msg_t* kyd = (keep_your_distance_msg_t*)call Packet.getPayload(&packet, sizeof(keep_your_distance_msg_t));
 			if (kyd == NULL) {
 				return;
@@ -65,19 +68,27 @@ implementation {
 		if (len != sizeof(keep_your_distance_msg_t)) {return bufPtr;}
 		else {
 			keep_your_distance_msg_t* kyd = (keep_your_distance_msg_t*)payload;
-			
 			/* LOGIC UPON MESSAGE RECEIVAL GOES HERE */
+			neighbouring_motes[kyd->sender_id - 1]++;
 			
+			printf("KeepYourDistanceC: Message received by mote %d, new message count for this mote: %d", kyd->sender_id, neighbouring_motes[kyd->sender_id - 1]);
+			printfflush();
+			
+			if(neighbouring_motes[kyd->sender_id - 1] >= 10){
+				// ALERT, MOTE TOO CLOSE
+				printf("KeepYourDistanceC", "KeepYourDistanceC: Mote %d is too close, 10 message reached: ALERT", kyd->sender_id);
+				printfflush();
+			}
 			return bufPtr;
 		}
 	}
 
-  event void AMSend.sendDone(message_t* bufPtr, error_t error) {
-    if (&packet == bufPtr) {
-      locked = FALSE;
-    }
-  }
-}
+	event void AMSend.sendDone(message_t* bufPtr, error_t error) {
+		if (&packet == bufPtr) {
+			locked = FALSE;
+			}
+		}
+	}
 
 
 

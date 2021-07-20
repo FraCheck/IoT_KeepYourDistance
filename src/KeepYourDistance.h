@@ -3,10 +3,10 @@
 
 typedef nx_struct keep_your_distance_msg {
   nx_uint16_t sender_id;
-} radio_count_msg_t;
+} keep_your_distance_msg_t;
 
 enum {
-  AM_RADIO_COUNT_MSG = 6,
+  AM_SEND_MSG = 6,
 };
 
 #endif
