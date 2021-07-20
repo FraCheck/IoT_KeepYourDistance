@@ -1,7 +1,7 @@
 # IoT_KeepYourDistance
 Keep Your Distance: a software prototype for a social distancing application using TinyOS and Node-RED, simulated in Cooja.
 Project for the Internet of Things course 2020/2021 @Polimi
-Developed by [Francesco Cecchetti](https://github.com/FraCheck) and Daniel Caputo.
+Developed by [Francesco Cecchetti](https://github.com/FraCheck) and [Daniel Caputo](https://github.com/Daniel111296).
 
 ## Adopted technologies
 
@@ -20,6 +20,6 @@ consecutive messages from that mote, it triggers an alarm. Such alarm
 contains the ID number of the two motes. It is shown in Cooja and
 forwarded to Node-Red via socket (a different one for each mote).
  - Upon the reception of the alert, Node-red sends a notification through
-IFTTT1 to your mobile phone.
+IFTTT to your mobile phone.
 Use at least 5 motes. Start the simulation with all the mote far away from
 each other and move them with the mouse testing different configurations. 
