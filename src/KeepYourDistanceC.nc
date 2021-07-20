@@ -32,14 +32,14 @@ implementation {
 			/* Assign frequency to the broadcaster timer */
 			uint32_t frequency = 500; // [ms]
 			
-			printf("Example of how to do a printf",frequency);
+			printf("Example of how to do a printf\n");
 			printfflush();
 			
 			call Timer1.startPeriodic(frequency);
 		}
-	else {
-		call AMControl.start();
-    }
+		else {
+			call AMControl.start();
+		}
 	}
 
 	event void AMControl.stopDone(error_t err) {
@@ -47,7 +47,7 @@ implementation {
 	}
   
 	event void Timer1.fired() {
-		printf("KeepYourDistanceC: Timer1[Broadcaster] fired");
+		printf("KeepYourDistanceC: Timer1[Broadcaster] fired\n");
 		printfflush();
 		if (!locked)
 		{
@@ -71,12 +71,12 @@ implementation {
 			/* LOGIC UPON MESSAGE RECEIVAL GOES HERE */
 			neighbouring_motes[kyd->sender_id - 1]++;
 			
-			printf("KeepYourDistanceC: Message received by mote %d, new message count for this mote: %d", kyd->sender_id, neighbouring_motes[kyd->sender_id - 1]);
+			printf("KeepYourDistanceC: Message received by mote %d, new message count for this mote: %d\n", kyd->sender_id, neighbouring_motes[kyd->sender_id - 1]);
 			printfflush();
 			
 			if(neighbouring_motes[kyd->sender_id - 1] >= 10){
 				// ALERT, MOTE TOO CLOSE
-				printf("KeepYourDistanceC", "KeepYourDistanceC: Mote %d is too close, 10 message reached: ALERT", kyd->sender_id);
+				printf("KeepYourDistanceC", "KeepYourDistanceC: Mote %d is too close, 10 message reached: ALERT\n", kyd->sender_id);
 				printfflush();
 			}
 			return bufPtr;
@@ -86,9 +86,9 @@ implementation {
 	event void AMSend.sendDone(message_t* bufPtr, error_t error) {
 		if (&packet == bufPtr) {
 			locked = FALSE;
-			}
 		}
 	}
+}
 
 
 

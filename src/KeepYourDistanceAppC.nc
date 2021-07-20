@@ -9,7 +9,7 @@ implementation {
 	components new AMReceiverC(AM_SEND_MSG);
 	components new TimerMilliC();
 	components ActiveMessageC;
-	components PrintfC;
+	components SerialPrintfC;
 	components SerialStartC;
 	
 	App.Boot -> MainC.Boot;

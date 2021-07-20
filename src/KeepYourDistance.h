@@ -1,5 +1,5 @@
-#ifndef KEEP_YOUR_DISTANCE_H
-#define KEEP_YOUR_DISTANCE_H
+#ifndef KEEPYOURDISTANCE_H
+#define KEEPYOURDISTANCE_H
 
 typedef nx_struct keep_your_distance_msg {
   nx_uint16_t sender_id;
