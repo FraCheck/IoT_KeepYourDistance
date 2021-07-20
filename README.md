@@ -7,7 +7,7 @@ Developed by [Francesco Cecchetti](https://github.com/FraCheck) and [Daniel Capu
 
  - TinyOS
  - Node-RED
- - Cooja
+ - Cooja Simulator
 
 ## Functional Specifications
 
