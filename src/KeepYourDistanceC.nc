@@ -6,7 +6,7 @@
 #define MOTES 7
 #define BROADCAST_FREQUENCY 500
 #define PROXIMIY_CHECK_FREQUENCY 800
-
+#define MESSAGES_COUNT_ALERT 10
 module KeepYourDistanceC @safe() {
   uses {
     interface Boot;
@@ -53,17 +53,21 @@ implementation {
 		if (len != sizeof(keep_your_distance_msg_t)) {return bufPtr;}
 		else {
 			keep_your_distance_msg_t* kyd = (keep_your_distance_msg_t*)payload;
-
+			
+			// Set a threshold to stop incrementing the counter if is already greater than MESSAGES_COUNT_ALERT(=10)
+			if (neighbouring_motes[kyd->sender_id - 1] > MESSAGES_COUNT_ALERT+100)
+				neighbouring_motes[kyd->sender_id - 1] = MESSAGES_COUNT_ALERT;
+			
 			neighbouring_motes[kyd->sender_id - 1]++;
 			
-			if(neighbouring_motes[kyd->sender_id - 1] < 10){
+			if(neighbouring_motes[kyd->sender_id - 1] < MESSAGES_COUNT_ALERT){
 				printf("Mote %d: Message received by mote %d, new message count for this mote: %d\n", TOS_NODE_ID, kyd->sender_id, neighbouring_motes[kyd->sender_id - 1]);
 				printfflush();
 			}
 			
-			if(neighbouring_motes[kyd->sender_id - 1] == 10){
+			if(neighbouring_motes[kyd->sender_id - 1] == MESSAGES_COUNT_ALERT){
 				// ALERT, MOTE TOO CLOSE
-				printf("Mote %d is too close, 10 message reached!\n", kyd->sender_id);
+				printf("Mote %d is too close, %d message reached!\n", kyd->sender_id, MESSAGES_COUNT_ALERT);
 				printfflush();
 				
 				//	Let's generate only 1 Alert message for the 2 motes
