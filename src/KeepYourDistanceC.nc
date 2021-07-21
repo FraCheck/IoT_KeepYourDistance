@@ -55,11 +55,12 @@ implementation {
 		else {
 			keep_your_distance_msg_t* kyd = (keep_your_distance_msg_t*)payload;
 			
-			// Set a threshold to stop incrementing the counter if is already greater than MESSAGES_COUNT_ALERT(=10)
+			// Set a threshold to stop incrementing the counter if is already much greater than MESSAGES_COUNT_ALERT(=10)
+			// Could be not needed, but just to avoid potential issues
 			if (neighbouring_motes[kyd->sender_id - 1] > MESSAGES_COUNT_ALERT+100)
 				neighbouring_motes[kyd->sender_id - 1] = MESSAGES_COUNT_ALERT;
 			
-			// Upon new message receival from mote i, increment the counter of received messages from mote i
+			// Upon new message receival from mote i, increment the counter of received messages from mote "sender_id"
 			neighbouring_motes[kyd->sender_id - 1]++;
 			
 			if(neighbouring_motes[kyd->sender_id - 1] < MESSAGES_COUNT_ALERT){
