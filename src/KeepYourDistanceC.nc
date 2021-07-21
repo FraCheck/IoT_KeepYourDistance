@@ -72,7 +72,7 @@ implementation {
 				
 				//	Let's generate only 1 Alert message for the 2 motes
 				if(TOS_NODE_ID < kyd->sender_id){
-					printf("Mote %d and %d have been too close for the past 5 seconds: ALERT\n", TOS_NODE_ID, kyd->sender_id);
+					printf("Mote %d and %d have been too close for the past 5 seconds: ALERT_%d,%d\n", TOS_NODE_ID, kyd->sender_id, TOS_NODE_ID, kyd->sender_id);
 					printfflush();
 				}
 			}

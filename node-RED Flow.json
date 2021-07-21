@@ -1,0 +1,165 @@
+[
+    {
+        "id": "b5d1af96.0416f8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "c78d92f8.43ac8",
+        "type": "tcp in",
+        "z": "b5d1af96.0416f8",
+        "name": "Mote1",
+        "server": "client",
+        "host": "localhost",
+        "port": "60001",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 70,
+        "y": 100,
+        "wires": [
+            [
+                "94309545.7a9488"
+            ]
+        ]
+    },
+    {
+        "id": "55579d11.da73bc",
+        "type": "tcp in",
+        "z": "b5d1af96.0416f8",
+        "name": "Mote2",
+        "server": "client",
+        "host": "localhost",
+        "port": "60002",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 70,
+        "y": 140,
+        "wires": [
+            [
+                "94309545.7a9488"
+            ]
+        ]
+    },
+    {
+        "id": "d38057d0.13c83",
+        "type": "tcp in",
+        "z": "b5d1af96.0416f8",
+        "name": "Mote3",
+        "server": "client",
+        "host": "localhost",
+        "port": "60003",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 70,
+        "y": 180,
+        "wires": [
+            [
+                "94309545.7a9488"
+            ]
+        ]
+    },
+    {
+        "id": "ebfdc0cf.96421",
+        "type": "tcp in",
+        "z": "b5d1af96.0416f8",
+        "name": "Mote4",
+        "server": "client",
+        "host": "localhost",
+        "port": "60004",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 70,
+        "y": 220,
+        "wires": [
+            [
+                "94309545.7a9488"
+            ]
+        ]
+    },
+    {
+        "id": "60e09d7e.906504",
+        "type": "tcp in",
+        "z": "b5d1af96.0416f8",
+        "name": "Mote5",
+        "server": "client",
+        "host": "localhost",
+        "port": "60005",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 70,
+        "y": 260,
+        "wires": [
+            [
+                "94309545.7a9488"
+            ]
+        ]
+    },
+    {
+        "id": "b6f3b658.36cb",
+        "type": "tcp in",
+        "z": "b5d1af96.0416f8",
+        "name": "Mote6",
+        "server": "client",
+        "host": "localhost",
+        "port": "60006",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 70,
+        "y": 300,
+        "wires": [
+            [
+                "94309545.7a9488"
+            ]
+        ]
+    },
+    {
+        "id": "baee377.948d8c8",
+        "type": "debug",
+        "z": "b5d1af96.0416f8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 390,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "94309545.7a9488",
+        "type": "function",
+        "z": "b5d1af96.0416f8",
+        "name": "Alert Filter",
+        "func": "if(msg.payload.includes(\"ALERT\")){\n    var messages = msg.payload.split('_');\n    var motes = messages[1].split(',');\n    msg.payload = \"Notification: Mote \" + motes[0].toString() + \" and Mote \" + motes[1].toString() + \" have been too close for 5 seconds or more.\";\n    return msg;\n}\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 220,
+        "y": 200,
+        "wires": [
+            [
+                "baee377.948d8c8"
+            ]
+        ]
+    }
+]
