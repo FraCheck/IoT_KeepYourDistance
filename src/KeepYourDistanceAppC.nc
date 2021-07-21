@@ -7,7 +7,8 @@ implementation {
 	components MainC, KeepYourDistanceC as App;
 	components new AMSenderC(AM_SEND_MSG);
 	components new AMReceiverC(AM_SEND_MSG);
-	components new TimerMilliC();
+	components new TimerMilliC() as TimerMilliC;
+	components new TimerMilliC() as TimerMilliC2;
 	components ActiveMessageC;
 	components SerialPrintfC;
 	components SerialStartC;
@@ -18,6 +19,7 @@ implementation {
 	App.AMSend -> AMSenderC;
 	App.AMControl -> ActiveMessageC;
 	App.Timer1 -> TimerMilliC;
+	App.Timer2 -> TimerMilliC2;
 	App.Packet -> AMSenderC;
 }
 

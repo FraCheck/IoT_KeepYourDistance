@@ -3,12 +3,17 @@
 #include "KeepYourDistance.h"
 #include "printf.h"
 
+#define MOTES 7
+#define BROADCAST_FREQUENCY 500
+#define PROXIMIY_CHECK_FREQUENCY 800
+
 module KeepYourDistanceC @safe() {
   uses {
     interface Boot;
     interface Receive;
 	interface AMSend;
     interface Timer<TMilli> as Timer1;
+	interface Timer<TMilli> as Timer2;
     interface SplitControl as AMControl;
     interface Packet;
   }
@@ -20,8 +25,10 @@ implementation {
 	/* Initialization of variables */
 	
 	// 7 total motes, 6 neighbours + 1 current mote, not to be incremented
-	int neighbouring_motes[6] = {0,0,0,0,0,0};
-	int neighbouring_motes_prev[6] = {0,0,0,0,0,0};
+	int neighbouring_motes[MOTES] = {0, 0, 0, 0, 0, 0};
+	int neighbouring_motes_prev[MOTES] = {0, 0, 0, 0, 0, 0, 0};
+	
+	int i = 0;
 	
 	event void Boot.booted() {
 		call AMControl.start();
@@ -29,13 +36,8 @@ implementation {
 
 	event void AMControl.startDone(error_t err) {
 		if (err == SUCCESS) {
-			/* Assign frequency to the broadcaster timer */
-			uint32_t frequency = 500; // [ms]
-			
-			printf("Example of how to do a printf\n");
-			printfflush();
-			
-			call Timer1.startPeriodic(frequency);
+			call Timer1.startPeriodic(BROADCAST_FREQUENCY);
+			call Timer2.startPeriodic(PROXIMIY_CHECK_FREQUENCY);
 		}
 		else {
 			call AMControl.start();
@@ -43,24 +45,7 @@ implementation {
 	}
 
 	event void AMControl.stopDone(error_t err) {
-		// do nothing
-	}
-  
-	event void Timer1.fired() {
-		printf("KeepYourDistanceC: Timer1[Broadcaster] fired\n");
-		printfflush();
-		if (!locked)
-		{
-			keep_your_distance_msg_t* kyd = (keep_your_distance_msg_t*)call Packet.getPayload(&packet, sizeof(keep_your_distance_msg_t));
-			if (kyd == NULL) {
-				return;
-			}
-			kyd->sender_id = TOS_NODE_ID;
-			if (call AMSend.send(AM_BROADCAST_ADDR, &packet, sizeof(keep_your_distance_msg_t)) == SUCCESS) {
-				dbg("KeepYourDistanceC", "KeepYourDistanceC: packet sent.\n");	
-				locked = TRUE;
-			}
-		}
+		// Do nothing
 	}
 
 	event message_t* Receive.receive(message_t* bufPtr, void* payload, uint8_t len) {
@@ -68,15 +53,17 @@ implementation {
 		if (len != sizeof(keep_your_distance_msg_t)) {return bufPtr;}
 		else {
 			keep_your_distance_msg_t* kyd = (keep_your_distance_msg_t*)payload;
-			/* LOGIC UPON MESSAGE RECEIVAL GOES HERE */
+
 			neighbouring_motes[kyd->sender_id - 1]++;
 			
-			printf("KeepYourDistanceC: Message received by mote %d, new message count for this mote: %d\n", kyd->sender_id, neighbouring_motes[kyd->sender_id - 1]);
-			printfflush();
+			if(neighbouring_motes[kyd->sender_id - 1] < 10){
+				printf("Mote %d: Message received by mote %d, new message count for this mote: %d\n", TOS_NODE_ID, kyd->sender_id, neighbouring_motes[kyd->sender_id - 1]);
+				printfflush();
+			}
 			
-			if(neighbouring_motes[kyd->sender_id - 1] >= 10){
+			if(neighbouring_motes[kyd->sender_id - 1] == 10){
 				// ALERT, MOTE TOO CLOSE
-				printf("KeepYourDistanceC", "KeepYourDistanceC: Mote %d is too close, 10 message reached: ALERT\n", kyd->sender_id);
+				printf("KeepYourDistanceC: Mote %d is too close, 10 message reached: ALERT\n", kyd->sender_id);
 				printfflush();
 			}
 			return bufPtr;
@@ -88,8 +75,47 @@ implementation {
 			locked = FALSE;
 		}
 	}
+	
+	event void Timer1.fired() {	// Message Broadcaster
+		/*
+		printf("Mote %d: Timer1 [Broadcaster] fired\n", TOS_NODE_ID);
+		printfflush()
+		*/
+		
+		if(!locked)
+		{
+			keep_your_distance_msg_t* kyd = (keep_your_distance_msg_t*)call Packet.getPayload(&packet, sizeof(keep_your_distance_msg_t));
+			if (kyd == NULL) {
+				return;
+			}
+			
+			kyd->sender_id = TOS_NODE_ID;
+			
+			if (call AMSend.send(AM_BROADCAST_ADDR, &packet, sizeof(keep_your_distance_msg_t)) == SUCCESS) {
+				dbg("KeepYourDistanceC", "KeepYourDistanceC: packet sent.\n");	
+				locked = TRUE;
+			}
+		}else
+			return;
+	}
+	
+	event void Timer2.fired(){
+		/*
+		printf("Mote %d: Timer2 [Proximity] fired\n", TOS_NODE_ID);
+		printfflush();
+		*/
+		
+		for(i=0; i<MOTES; i++){
+			if((neighbouring_motes[i] == neighbouring_motes_prev[i]) && neighbouring_motes[i]!=0)	//	If Mote i is not to close anymore...
+			{
+			//	Reset the counter to 0
+			
+				printf("Mote %d: Mote %d is gone, resetting the counter to 0...\n", TOS_NODE_ID, i+1);
+				
+				neighbouring_motes[i] = 0;
+			}
+			//	Save the state
+			neighbouring_motes_prev[i] = neighbouring_motes[i];
+		}
+	}
 }
-
-
-
-
