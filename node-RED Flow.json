@@ -142,8 +142,8 @@
         "console": false,
         "tostatus": false,
         "complete": "payload",
-        "x": 390,
-        "y": 200,
+        "x": 450,
+        "y": 100,
         "wires": []
     },
     {
@@ -151,15 +151,31 @@
         "type": "function",
         "z": "b5d1af96.0416f8",
         "name": "Alert Filter",
-        "func": "if(msg.payload.includes(\"ALERT\")){\n    var messages = msg.payload.split('_');\n    var motes = messages[1].split(',');\n    msg.payload = \"Notification: Mote \" + motes[0].toString() + \" and Mote \" + motes[1].toString() + \" have been too close for 5 seconds or more.\";\n    return msg;\n}\n\n",
+        "func": "if(msg.payload.includes(\"ALERT\")){\n    var messages = msg.payload.split('_');\n    var motes = messages[1].split(',');\n    msg.event = \"Alert\"\n    var pl = \"Notification: Mote \" + motes[0].toString() + \" and Mote \" + motes[1].toString() + \" have been too close for 5 seconds or more.\";\n    msg.payload = {\"value1\": pl};\n    return msg;\n}\n\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 220,
+        "x": 230,
         "y": 200,
         "wires": [
             [
-                "baee377.948d8c8"
+                "baee377.948d8c8",
+                "2aa1ea82.66181e"
             ]
+        ]
+    },
+    {
+        "id": "2aa1ea82.66181e",
+        "type": "http request",
+        "z": "b5d1af96.0416f8",
+        "name": "HTTP Request",
+        "method": "POST",
+        "ret": "txt",
+        "url": "https://maker.ifttt.com/trigger/{{event}}/with/key/pgPjJNzRrEmOMGKQiEuymuYiz2DyV0UXfHsRaGAjQTT",
+        "tls": "",
+        "x": 440,
+        "y": 280,
+        "wires": [
+            []
         ]
     }
 ]
