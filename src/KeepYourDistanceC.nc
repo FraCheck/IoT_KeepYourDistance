@@ -63,8 +63,14 @@ implementation {
 			
 			if(neighbouring_motes[kyd->sender_id - 1] == 10){
 				// ALERT, MOTE TOO CLOSE
-				printf("KeepYourDistanceC: Mote %d is too close, 10 message reached: ALERT\n", kyd->sender_id);
+				printf("Mote %d is too close, 10 message reached!\n", kyd->sender_id);
 				printfflush();
+				
+				//	Let's generate only 1 Alert message for the 2 motes
+				if(TOS_NODE_ID < kyd->sender_id){
+					printf("Mote %d and %d have been too close for the past 5 seconds: ALERT\n", TOS_NODE_ID, kyd->sender_id);
+					printfflush();
+				}
 			}
 			return bufPtr;
 		}
