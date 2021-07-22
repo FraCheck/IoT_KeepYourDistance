@@ -22,5 +22,3 @@ implementation {
 	App.Timer2 -> TimerMilliC2;
 	App.Packet -> AMSenderC;
 }
-
-

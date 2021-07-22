@@ -1,0 +1,183 @@
+00:18.984	ID:6	Mote 6: Message received by mote 2, new message count for this mote: 1
+
+00:18.993	ID:2	Mote 2: Message received by mote 6, new message count for this mote: 1
+
+00:19.474	ID:6	Mote 6: Message received by mote 2, new message count for this mote: 2
+
+00:19.488	ID:2	Mote 2: Message received by mote 6, new message count for this mote: 2
+
+00:19.960	ID:6	Mote 6: Message received by mote 2, new message count for this mote: 3
+
+00:19.971	ID:2	Mote 2: Message received by mote 6, new message count for this mote: 3
+
+00:20.451	ID:6	Mote 6: Message received by mote 2, new message count for this mote: 4
+
+00:20.461	ID:2	Mote 2: Message received by mote 6, new message count for this mote: 4
+
+00:20.933	ID:6	Mote 6: Message received by mote 2, new message count for this mote: 5
+
+00:20.951	ID:2	Mote 2: Message received by mote 6, new message count for this mote: 5
+
+00:21.427	ID:6	Mote 6: Message received by mote 2, new message count for this mote: 6
+
+00:21.439	ID:2	Mote 2: Message received by mote 6, new message count for this mote: 6
+
+00:21.916	ID:6	Mote 6: Message received by mote 2, new message count for this mote: 7
+
+00:21.927	ID:2	Mote 2: Message received by mote 6, new message count for this mote: 7
+
+00:22.402	ID:6	Mote 6: Message received by mote 2, new message count for this mote: 8
+
+00:22.411	ID:2	Mote 2: Message received by mote 6, new message count for this mote: 8
+
+00:22.887	ID:6	Mote 6: Message received by mote 2, new message count for this mote: 9
+
+00:22.899	ID:2	Mote 2: Message received by mote 6, new message count for this mote: 9
+
+00:23.377	ID:6	Mote 6: Mote 2 is too close, 10 message reached!
+
+00:23.390	ID:2	Mote 2: Mote 6 is too close, 10 message reached!
+
+00:23.394	ID:2	Mote 2 and 6 have been too close for the past 5 seconds: ALERT_2,6
+
+01:46.669	ID:2	Mote 2: Mote 6 is out of range, resetting the counter to 0...
+
+01:46.684	ID:6	Mote 6: Mote 2 is out of range, resetting the counter to 0...
+
+03:27.607	ID:7	Mote 7: Message received by mote 1, new message count for this mote: 1
+
+03:27.627	ID:1	Mote 1: Message received by mote 7, new message count for this mote: 1
+
+03:28.097	ID:7	Mote 7: Message received by mote 1, new message count for this mote: 2
+
+03:28.111	ID:1	Mote 1: Message received by mote 7, new message count for this mote: 2
+
+03:28.581	ID:7	Mote 7: Message received by mote 1, new message count for this mote: 3
+
+03:28.605	ID:1	Mote 1: Message received by mote 7, new message count for this mote: 3
+
+03:29.071	ID:7	Mote 7: Message received by mote 1, new message count for this mote: 4
+
+03:29.090	ID:1	Mote 1: Message received by mote 7, new message count for this mote: 4
+
+03:29.558	ID:7	Mote 7: Message received by mote 1, new message count for this mote: 5
+
+03:29.575	ID:1	Mote 1: Message received by mote 7, new message count for this mote: 5
+
+03:30.048	ID:7	Mote 7: Message received by mote 1, new message count for this mote: 6
+
+03:30.063	ID:1	Mote 1: Message received by mote 7, new message count for this mote: 6
+
+03:30.531	ID:7	Mote 7: Message received by mote 1, new message count for this mote: 7
+
+03:30.551	ID:1	Mote 1: Message received by mote 7, new message count for this mote: 7
+
+03:31.026	ID:7	Mote 7: Message received by mote 1, new message count for this mote: 8
+
+03:31.042	ID:1	Mote 1: Message received by mote 7, new message count for this mote: 8
+
+03:31.508	ID:7	Mote 7: Message received by mote 1, new message count for this mote: 9
+
+03:31.528	ID:1	Mote 1: Message received by mote 7, new message count for this mote: 9
+
+03:32.002	ID:7	Mote 7: Mote 1 is too close, 10 message reached!
+
+03:32.015	ID:1	Mote 1: Mote 7 is too close, 10 message reached!
+
+03:32.019	ID:1	Mote 1 and 7 have been too close for the past 5 seconds: ALERT_1,7
+
+04:38.892	ID:3	Mote 3: Message received by mote 1, new message count for this mote: 1
+
+04:38.912	ID:3	Mote 3: Message received by mote 7, new message count for this mote: 1
+
+04:38.924	ID:1	Mote 1: Message received by mote 3, new message count for this mote: 1
+
+04:38.924	ID:7	Mote 7: Message received by mote 3, new message count for this mote: 1
+
+04:39.384	ID:3	Mote 3: Message received by mote 1, new message count for this mote: 2
+
+04:39.400	ID:3	Mote 3: Message received by mote 7, new message count for this mote: 2
+
+04:39.409	ID:1	Mote 1: Message received by mote 3, new message count for this mote: 2
+
+04:39.409	ID:7	Mote 7: Message received by mote 3, new message count for this mote: 2
+
+04:39.871	ID:3	Mote 3: Message received by mote 1, new message count for this mote: 3
+
+04:39.887	ID:3	Mote 3: Message received by mote 7, new message count for this mote: 3
+
+04:39.903	ID:7	Mote 7: Message received by mote 3, new message count for this mote: 3
+
+04:39.903	ID:1	Mote 1: Message received by mote 3, new message count for this mote: 3
+
+04:40.359	ID:3	Mote 3: Message received by mote 1, new message count for this mote: 4
+
+04:40.379	ID:3	Mote 3: Message received by mote 7, new message count for this mote: 4
+
+04:40.387	ID:7	Mote 7: Message received by mote 3, new message count for this mote: 4
+
+04:40.387	ID:1	Mote 1: Message received by mote 3, new message count for this mote: 4
+
+04:40.847	ID:3	Mote 3: Message received by mote 1, new message count for this mote: 5
+
+04:40.871	ID:3	Mote 3: Message received by mote 7, new message count for this mote: 5
+
+04:40.881	ID:7	Mote 7: Message received by mote 3, new message count for this mote: 5
+
+04:40.881	ID:1	Mote 1: Message received by mote 3, new message count for this mote: 5
+
+04:41.340	ID:3	Mote 3: Message received by mote 1, new message count for this mote: 6
+
+04:41.358	ID:3	Mote 3: Message received by mote 7, new message count for this mote: 6
+
+04:41.369	ID:7	Mote 7: Message received by mote 3, new message count for this mote: 6
+
+04:41.369	ID:1	Mote 1: Message received by mote 3, new message count for this mote: 6
+
+04:41.824	ID:3	Mote 3: Message received by mote 1, new message count for this mote: 7
+
+04:41.839	ID:3	Mote 3: Message received by mote 7, new message count for this mote: 7
+
+04:41.856	ID:7	Mote 7: Message received by mote 3, new message count for this mote: 7
+
+04:41.856	ID:1	Mote 1: Message received by mote 3, new message count for this mote: 7
+
+04:42.311	ID:3	Mote 3: Message received by mote 1, new message count for this mote: 8
+
+04:42.329	ID:3	Mote 3: Message received by mote 7, new message count for this mote: 8
+
+04:42.336	ID:1	Mote 1: Message received by mote 3, new message count for this mote: 8
+
+04:42.336	ID:7	Mote 7: Message received by mote 3, new message count for this mote: 8
+
+04:42.797	ID:3	Mote 3: Message received by mote 1, new message count for this mote: 9
+
+04:42.825	ID:3	Mote 3: Message received by mote 7, new message count for this mote: 9
+
+04:42.827	ID:1	Mote 1: Message received by mote 3, new message count for this mote: 9
+
+04:42.827	ID:7	Mote 7: Message received by mote 3, new message count for this mote: 9
+
+04:43.292	ID:3	Mote 3: Mote 1 is too close, 10 message reached!
+
+04:43.306	ID:3	Mote 3: Mote 7 is too close, 10 message reached!
+
+04:43.310	ID:3	Mote 3 and 7 have been too close for the past 5 seconds: ALERT_3,7
+
+04:43.325	ID:1	Mote 1: Mote 3 is too close, 10 message reached!
+
+04:43.325	ID:7	Mote 7: Mote 3 is too close, 10 message reached!
+
+04:43.329	ID:1	Mote 1 and 3 have been too close for the past 5 seconds: ALERT_1,3
+
+05:40.410	ID:1	Mote 1: Mote 7 is out of range, resetting the counter to 0...
+
+05:40.430	ID:7	Mote 7: Mote 3 is out of range, resetting the counter to 0...
+
+05:40.927	ID:3	Mote 3: Mote 7 is out of range, resetting the counter to 0...
+
+05:41.210	ID:7	Mote 7: Mote 1 is out of range, resetting the counter to 0...
+
+06:39.784	ID:1	Mote 1: Mote 3 is out of range, resetting the counter to 0...
+
+06:40.301	ID:3	Mote 3: Mote 1 is out of range, resetting the counter to 0...

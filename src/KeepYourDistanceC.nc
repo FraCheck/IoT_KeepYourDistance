@@ -26,7 +26,7 @@ implementation {
 	/* Initialization of variables */
 	
 	// 7 total motes, 6 neighbours + 1 current mote that won't be incremented
-	int neighbouring_motes[MOTES] = {0, 0, 0, 0, 0, 0};
+	int neighbouring_motes[MOTES] = {0, 0, 0, 0, 0, 0, 0};
 	int neighbouring_motes_prev[MOTES] = {0, 0, 0, 0, 0, 0, 0};
 	
 	int i = 0;
@@ -55,8 +55,8 @@ implementation {
 		else {
 			keep_your_distance_msg_t* kyd = (keep_your_distance_msg_t*)payload;
 			
-			// Set a threshold to stop incrementing the counter if is already much greater than MESSAGES_COUNT_ALERT(=10)
-			// Could be not needed, but just to avoid potential issues
+			// Setup a threshold to stop incrementing the counter if is already much greater than MESSAGES_COUNT_ALERT(=10)
+			// Could be not needed, but just in case, to avoid potential issues
 			if (neighbouring_motes[kyd->sender_id - 1] > MESSAGES_COUNT_ALERT+100)
 				neighbouring_motes[kyd->sender_id - 1] = MESSAGES_COUNT_ALERT;
 			
@@ -90,11 +90,6 @@ implementation {
 	}
 	
 	event void Timer1.fired() {	// Message Broadcaster
-		/*
-		printf("Mote %d: Timer1 [Broadcaster] fired\n", TOS_NODE_ID);
-		printfflush()
-		*/
-		
 		if(!locked)
 		{
 			keep_your_distance_msg_t* kyd = (keep_your_distance_msg_t*)call Packet.getPayload(&packet, sizeof(keep_your_distance_msg_t));
@@ -112,22 +107,16 @@ implementation {
 			return;
 	}
 	
-	event void Timer2.fired(){
-		/*
-		printf("Mote %d: Timer2 [Proximity] fired\n", TOS_NODE_ID);
-		printfflush();
-		*/
-		
+	event void Timer2.fired(){ // Proximity check 
 		for(i=0; i<MOTES; i++){
 			if((neighbouring_motes[i] == neighbouring_motes_prev[i]) && neighbouring_motes[i]!=0)	//	If Mote i is not to close anymore...
 			{
 			//	Reset the counter to 0
-			
-				printf("Mote %d: Mote %d is gone, resetting the counter to 0...\n", TOS_NODE_ID, i+1);
-				
 				neighbouring_motes[i] = 0;
+				
+				printf("Mote %d: Mote %d is out of range, resetting the counter to 0...\n", TOS_NODE_ID, i+1);
 			}
-			//	Save the state
+			//	Save the new state
 			neighbouring_motes_prev[i] = neighbouring_motes[i];
 		}
 	}
