@@ -1,6 +1,6 @@
 # IoT_KeepYourDistance
 Keep Your Distance: a software prototype for a social distancing application using TinyOS and Node-RED, simulated in Cooja.
-Project for the Internet of Things course 2020/2021 @Polimi
+Project for the Internet of Things course 2020/2021 at Politecnico di Milano
 Developed by [Francesco Cecchetti](https://github.com/FraCheck) and [Daniel Caputo](https://github.com/Daniel111296).
 
 ## Adopted technologies
